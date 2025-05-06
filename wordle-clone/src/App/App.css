@@ -1,0 +1,232 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  block-size: 100vh;
+  background: linear-gradient(135deg, rgb(0, 119, 255), yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  max-inline-size: 90%;
+  inline-size: 500px;
+}
+
+h1 {
+  color: #0055aa;
+  font-size: 3rem;
+  margin-block-end: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+}
+
+input {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #0077ff;
+  border-radius: 8px;
+  margin-block-end: 1rem;
+  inline-size: 80%;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  outline: none;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+input:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+  transform: scale(1.03);
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #0077ff, #00aaff);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 10px 0;
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.6);
+  background: linear-gradient(45deg, #0066dd, #0099ff);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 119, 255, 0.4);
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+button:hover::before {
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.play-again {
+  background: linear-gradient(45deg, #ffaa00, #ffcc00);
+  box-shadow: 0 4px 15px rgba(255, 170, 0, 0.4);
+}
+
+.play-again:hover {
+  background: linear-gradient(45deg, #ff9900, #ffbb00);
+  box-shadow: 0 6px 20px rgba(255, 170, 0, 0.6);
+}
+
+.error-message {
+  color: #ff3366;
+  font-weight: bold;
+  margin-block-start: 0.5rem;
+  text-align: center;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: 1rem;
+  text-align: center;
+}
+
+.success-message {
+  color: #00aa55;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.failure-message {
+  color: #ff3366;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.row {
+  display: flex;
+  margin: 5px 0;
+}
+
+.letter {
+  inline-size: 50px;
+  block-size: 50px;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 2px solid #0077ff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.correct {
+  background-color: #00cc66;
+  border-color: #00aa55;
+  color: white;
+  animation: flip 0.5s;
+}
+
+.present {
+  background-color: #ffcc00;
+  border-color: #ffaa00;
+  color: white;
+  animation: flip 0.5s;
+}
+
+.absent {
+  background-color: #777;
+  border-color: #555;
+  color: white;
+  animation: flip 0.5s;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
