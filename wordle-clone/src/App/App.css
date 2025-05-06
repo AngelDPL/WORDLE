@@ -1,12 +1,14 @@
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  block-size: 100vh;
+  min-block-size: 100vh;
   background: linear-gradient(135deg, rgb(0, 119, 255), yellow);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #333;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .main-container {
@@ -15,29 +17,31 @@ body {
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.85);
-  padding: 2rem;
+  padding: clamp(1rem, 5vw, 2rem);
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
-  max-inline-size: 90%;
-  inline-size: 500px;
+  inline-size: min(500px, 100%);
+  max-inline-size: 100%;
+  overflow: hidden;
 }
 
 h1 {
   color: #0055aa;
-  font-size: 3rem;
-  margin-block-end: 2rem;
+  font-size: clamp(2rem, 8vw, 3rem);
+  margin-block-end: clamp(1rem, 4vw, 2rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 2px;
+  text-align: center;
 }
 
 input {
-  padding: 12px 16px;
-  font-size: 1rem;
+  padding: clamp(8px, 3vw, 12px) clamp(10px, 4vw, 16px);
+  font-size: clamp(0.9rem, 3vw, 1rem);
   border: 2px solid #0077ff;
   border-radius: 8px;
   margin-block-end: 1rem;
-  inline-size: 80%;
+  inline-size: min(80%, 300px);
   background-color: rgba(255, 255, 255, 0.9);
   transition: all 0.3s ease;
   outline: none;
@@ -53,8 +57,8 @@ input:focus {
 }
 
 button {
-  padding: 12px 25px;
-  font-size: 1rem;
+  padding: clamp(8px, 3vw, 12px) clamp(15px, 5vw, 25px);
+  font-size: clamp(0.8rem, 3vw, 1rem);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -68,6 +72,7 @@ button {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  inline-size: min(200px, 80%);
 }
 
 button:hover {
@@ -123,6 +128,7 @@ button:hover::before {
   margin-block-start: 0.5rem;
   text-align: center;
   animation: shake 0.5s ease-in-out;
+  font-size: clamp(0.8rem, 3vw, 1rem);
 }
 
 @keyframes shake {
@@ -156,7 +162,7 @@ button:hover::before {
 .success-message {
   color: #00aa55;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
   animation: pulse 1.5s infinite;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -164,7 +170,7 @@ button:hover::before {
 .failure-message {
   color: #ff3366;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
 }
 
 @keyframes pulse {
@@ -182,16 +188,17 @@ button:hover::before {
 .row {
   display: flex;
   margin: 5px 0;
+  justify-content: center;
 }
 
 .letter {
-  inline-size: 50px;
-  block-size: 50px;
-  margin: 0 5px;
+  inline-size: clamp(30px, 10vw, 50px);
+  block-size: clamp(30px, 10vw, 50px);
+  margin: 0 clamp(2px, 1vw, 5px);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 4vw, 1.5rem);
   font-weight: bold;
   border: 2px solid #0077ff;
   border-radius: 8px;
@@ -228,5 +235,81 @@ button:hover::before {
   }
   100% {
     transform: rotateX(0);
+  }
+}
+
+@media (max-width: 380px) {
+  .main-container {
+    padding: 1rem;
+  }
+  
+  h1 {
+    margin-block-end: 0.8rem;
+  }
+  
+  .letter {
+    inline-size: clamp(25px, 8vw, 40px);
+    block-size: clamp(25px, 8vw, 40px);
+    margin: 0 2px;
+  }
+  
+  input {
+    margin-block-end: 0.7rem;
+  }
+  
+  button {
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 320px) {
+  .letter {
+    inline-size: clamp(22px, 7vw, 30px);
+    block-size: clamp(22px, 7vw, 30px);
+    margin: 0 1px;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    padding: 5px;
+  }
+  
+  .main-container {
+    padding: 0.8rem;
+  }
+  
+  h1 {
+    margin-block-end: 0.5rem;
+    font-size: 1.8rem;
+  }
+  
+  .row {
+    margin: 3px 0;
+  }
+  
+  .letter {
+    inline-size: clamp(25px, 5vh, 40px);
+    block-size: clamp(25px, 5vh, 40px);
+  }
+  
+  button {
+    margin: 5px 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main-container {
+    inline-size: min(600px, 80%);
+  }
+  
+  .letter {
+    inline-size: 45px;
+    block-size: 45px;
   }
 }
